@@ -15,6 +15,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const Listing = require("./models/listing.js");
+const wrapAsync=require("./utils/wrapAsync.js");
 
 
 
@@ -83,9 +85,12 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.get("/", (req, res) => {
-    res.render("index.ejs"); // Ensure you have a home.ejs file in the views folder
-});
+app.get("/",wrapAsync(async (req, res) => {
+    const allListings = await Listing.find().populate("owner");
+
+    res.render("./listings/index.ejs", { allListings });
+})
+);
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
