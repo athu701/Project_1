@@ -83,6 +83,9 @@ app.use((req,res,next)=>{
     next();
 });
 
+app.get("/", (req, res) => {
+    res.render("index.ejs"); // Ensure you have a home.ejs file in the views folder
+});
 
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
