@@ -31,63 +31,131 @@
   .tax-toggle{
     border: 1px solid black;
     border-radius: 1rem;
-    height: 3.25rem;
+    height: 1.25rem;
+    width: 17rem;
     padding: 1rem;
-    margin-left: 5rem;
+    margin-top: 1rem;
+    
+    margin-bottom:2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
+  .filters-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .filters-container {
+     display: flex;
+     overflow-x: auto;
+     white-space: nowrap;
+     scroll-behavior: smooth;
+     width: 100%;
+  }
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+      min-width: 50px;
+      text-align: center;
+  }
+
+     .filter div {
+        font-size: 24px;
+  }
+       .scroll-btn {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          padding: 10px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 10;
+  }
+  .left-arrow {
+    left: 0;
+    margin-top: 5rem !important;
+    position: relative;
+  }
+
+  .right-arrow {
+    right: 0;
+    margin-top: 5rem !important;
+    position: relative;
+  }
+
+  .hidden {
+     display: none;
+  }
+
+ 
+      
 </style>
 
 
-<body>
+<body class="container py-4">
     <!-- <h3>ALL Listings</h3> -->
-    <div id="filters">
-      <a href="/listings/find?tag=Trending" class="filter">
-          <div><i class="fa-solid fa-fire"></i></div>
-          <p>Trending</p>
-      </a>
-      <a href="/listings/find?tag=Rooms" class="filter">
-          <div><i class="fa-solid fa-bed"></i></div>
-          <p>Rooms</p>
-      </a>
-      <a href="/listings/find?tag=Iconic Cities" class="filter">
-          <div><i class="fa-solid fa-mountain-city"></i></div>
-          <p>Iconic Cities</p>
-      </a>
-      <a href="/listings/find?tag=Mountains" class="filter">
-          <div><i class="fa-solid fa-mountain"></i></div>
-          <p>Mountains</p>
-      </a>
-      <a href="/listings/find?tag=Castles" class="filter">
-          <div><i class="fa-solid fa-chess-rook"></i></div>
-          <p>Castles</p>
-      </a>
-      <a href="/listings/find?tag=Amazing Pools" class="filter">
-          <div><i class="fa-solid fa-person-swimming"></i></div>
-          <p>Amazing Pools</p>
-      </a>
-      <a href="/listings/find?tag=Camping" class="filter">
-          <div><i class="fa-solid fa-campground"></i></div>
-          <p>Camping</p>
-      </a>
-      <a href="/listings/find?tag=Farms" class="filter">
-          <div><i class="fa-solid fa-cow"></i></div>
-          <p>Farms</p>
-      </a>
-      <a href="/listings/find?tag=Arctic" class="filter">
-          <div><i class="fa-solid fa-snowman"></i></div>
-          <p>Arctic</p>
-      </a>
-
-        <div class="tax-toggle">
-          <div class="form-check-reverse form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Display Total after Taxes</label>
-          </div>
-        </div>
-     </div>
-    
+    <div class="filters-wrapper">
+      <button class="scroll-btn left-arrow hidden" id="leftArrow">◀</button>
+      
+      <div id="filters" class="filters-container d-flex flex-nowrap overflow-auto">
+          <a href="/listings/find?tag=Trending" class="filter">
+              <div><i class="fa-solid fa-fire"></i></div>
+              <p>Trending</p>
+          </a>
+          <a href="/listings/find?tag=Rooms" class="filter">
+              <div><i class="fa-solid fa-bed"></i></div>
+              <p>Rooms</p>
+          </a>
+          <a href="/listings/find?tag=Iconic Cities" class="filter">
+              <div><i class="fa-solid fa-mountain-city"></i></div>
+              <p>Iconic Cities</p>
+          </a>
+          <a href="/listings/find?tag=Mountains" class="filter">
+              <div><i class="fa-solid fa-mountain"></i></div>
+              <p>Mountains</p>
+          </a>
+          <a href="/listings/find?tag=Castles" class="filter">
+              <div><i class="fa-solid fa-chess-rook"></i></div>
+              <p>Castles</p>
+          </a>
+          <a href="/listings/find?tag=Amazing Pools" class="filter">
+              <div><i class="fa-solid fa-person-swimming"></i></div>
+              <p>Amazing Pools</p>
+          </a>
+          <a href="/listings/find?tag=Camping" class="filter">
+              <div><i class="fa-solid fa-campground"></i></div>
+              <p>Camping</p>
+          </a>
+          <a href="/listings/find?tag=Farms" class="filter">
+              <div><i class="fa-solid fa-cow"></i></div>
+              <p>Farms</p>
+          </a>
+          <a href="/listings/find?tag=Arctic" class="filter">
+              <div><i class="fa-solid fa-snowman"></i></div>
+              <p>Arctic</p>
+          </a>
+      </div>
+      
+      <button class="scroll-btn right-arrow hidden" id="rightArrow">▶</button>
+  </div>
+  
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input class="form-check-input input-box" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+      <label class="form-check-label input-label" for="flexSwitchCheckDefault">Display Total after Taxes</label>
+    </div>
+  </div>
+  
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
     <% for(let listing of allListings){ %>
       <a href="/listings/<%=listing._id %>" class="listing-link">
@@ -122,6 +190,53 @@
     </div>
 
 <script>
+  
+  const filters = document.getElementById("filters");
+    const leftArrow = document.getElementById("leftArrow");
+    const rightArrow = document.getElementById("rightArrow");
+
+    function checkArrows() {
+        
+        if (filters.scrollWidth > filters.clientWidth) {
+            leftArrow.classList.remove("hidden");
+            rightArrow.classList.remove("hidden");
+        } else {
+            leftArrow.classList.add("hidden");
+            rightArrow.classList.add("hidden");
+        }
+
+    
+        if (filters.scrollLeft <= 0) {
+            leftArrow.classList.add("hidden");
+        } else {
+            leftArrow.classList.remove("hidden");
+        }
+
+       
+        if (filters.scrollLeft + filters.clientWidth >= filters.scrollWidth) {
+            rightArrow.classList.add("hidden");
+        } else {
+            rightArrow.classList.remove("hidden");
+        }
+    }
+
+    leftArrow.addEventListener("click", () => {
+        filters.scrollBy({ left: -200, behavior: "smooth" });
+    });
+
+   
+    rightArrow.addEventListener("click", () => {
+        filters.scrollBy({ left: 200, behavior: "smooth" });
+    });
+
+    filters.addEventListener("scroll", checkArrows);
+
+  
+    window.addEventListener("resize", checkArrows);
+
+   
+    checkArrows();
+
   let taxSwitch = document.getElementById("flexSwitchCheckDefault");
   taxSwitch.addEventListener("click",()=>{
     let taxInfo = document.getElementsByClassName("tax-info");
