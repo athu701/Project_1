@@ -85,6 +85,8 @@
 
 <script>
   document.getElementById("showPosts").addEventListener("click", function() {
+     document.getElementById("showFavourites").style.backgroundColor="grey";
+     document.getElementById("showPosts").style.backgroundColor="blue";
       document.getElementById("postsSection").style.display = "block";
       document.getElementById("favouritesSection").style.display = "none";
       this.classList.add("active");
@@ -92,6 +94,8 @@
   });
 
   document.getElementById("showFavourites").addEventListener("click", function() {
+      document.getElementById("showPosts").style.backgroundColor="grey";
+      document.getElementById("showFavourites").style.backgroundColor="blue";
       document.getElementById("favouritesSection").style.display = "block";
       document.getElementById("postsSection").style.display = "none";
       this.classList.add("active");
